@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{20E2D374-6C6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neptune", "src\Neptune\Neptune.csproj", "{541A9EF4-A9A9-4E4F-A13A-F2B271FBBEC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn", "src\Saturn\Saturn.csproj", "{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,21 @@ Global
 		{541A9EF4-A9A9-4E4F-A13A-F2B271FBBEC3}.Release|x64.Build.0 = Release|Any CPU
 		{541A9EF4-A9A9-4E4F-A13A-F2B271FBBEC3}.Release|x86.ActiveCfg = Release|Any CPU
 		{541A9EF4-A9A9-4E4F-A13A-F2B271FBBEC3}.Release|x86.Build.0 = Release|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Release|x64.Build.0 = Release|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{541A9EF4-A9A9-4E4F-A13A-F2B271FBBEC3} = {20E2D374-6C6C-4AB6-8D43-0DD409F42240}
+		{3E7DC980-9182-4D5C-82BE-2BC21FA6D68D} = {20E2D374-6C6C-4AB6-8D43-0DD409F42240}
 	EndGlobalSection
 EndGlobal
