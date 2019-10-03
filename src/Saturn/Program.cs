@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Saturn
 {
@@ -6,7 +7,12 @@ namespace Saturn
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var host = WebHost
+                .CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .Build();
+
+            host.Run();
         }
     }
 }
