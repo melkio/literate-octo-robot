@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  neptune:
+    build: 
+      context: "./src/Neptune"
+    environment:
+      - "VALUES_API_DELAY=1000"
+
+  saturn:
+    build: 
+      context: "./src/Saturn"
+    environment:
+      - "NEPTUNE_API_HOST_URL=http://neptune"
+    ports:
+      - 80:80
+    
