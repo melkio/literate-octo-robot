@@ -14,6 +14,8 @@ namespace Saturn
             services
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSingleton<NeptuneClient>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
