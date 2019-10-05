@@ -11,9 +11,13 @@ namespace Saturn
 
         public NeptuneClient()
         {
+            var baseAddress = Environment.GetEnvironmentVariable("NEPTUNE_API_HOST_URL");
+            var secondsTimeout = int.Parse(Environment.GetEnvironmentVariable("NEPTUNE_API_DEFAULT_SECONDS_TIMEOUT") ?? "100");
+
             client = new HttpClient
             {
-                BaseAddress = new Uri(Environment.GetEnvironmentVariable("NEPTUNE_API_HOST_URL"))
+                BaseAddress = new Uri(baseAddress),
+                Timeout = TimeSpan.FromSeconds(secondsTimeout)
             };
         }
 
