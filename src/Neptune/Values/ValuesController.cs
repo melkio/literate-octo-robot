@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Neptune.Values
@@ -8,17 +7,20 @@ namespace Neptune.Values
     public class ValuesController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public ActionResult Get()
         {
-            int delay = 0;
-            int.TryParse(Environment.GetEnvironmentVariable("VALUES_API_DELAY"), out delay);
+            var threshold = int.Parse(Environment.GetEnvironmentVariable("NEPTUNE_API_DELAY_THRESHOLD") ?? "200");
+
+            if (DateTime.Now.Millisecond < threshold)
+            {
+                var secondsDelay = int.Parse(Environment.GetEnvironmentVariable("NEPTUNE_VALUES_API_SECONDS_DELAY") ?? "0");
+                Run.For(TimeSpan.FromSeconds(secondsDelay));
+            }
 
             var random = new Random(DateTime.Now.Millisecond);
-            var seed = random.Next(1, 10);
+            var value = random.Next(1, 10);
 
-            await Task.Delay(seed * delay);
-
-            return Ok(new { value = seed });
+            return Ok(new { value = value });
         }
     }
 }
