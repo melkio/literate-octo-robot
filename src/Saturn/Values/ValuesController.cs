@@ -1,17 +1,19 @@
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Saturn.Values
 {
     [Route("api/values")]
     public class ValuesController : ControllerBase
     {
-        private readonly NeptuneClient client;
+        private readonly IHttpClientFactory factory;
 
-        public ValuesController(NeptuneClient client)
+        public ValuesController(IHttpClientFactory factory)
         {
-            this.client = client;
+            this.factory = factory;
         }
 
         [HttpGet]
@@ -29,9 +31,14 @@ namespace Saturn.Values
             var random = new Random(DateTime.Now.Millisecond);
             var seed = random.Next(1, 10);
 
-            var response = await client.Get();
+            var client = factory.CreateClient("Neptune");
+            var response = await client.GetAsync("/api/values");
+            response.EnsureSuccessStatusCode();
 
-            var model = new { saturn = seed, neptune = response.Value };
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonConvert.DeserializeAnonymousType(content, new { value = "" });
+
+            var model = new { saturn = seed, neptune = json.value };
             return Ok(model);
         }
     }

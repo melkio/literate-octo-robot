@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace Saturn
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<NeptuneClient>();
+            services.AddNeptuneClient();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
