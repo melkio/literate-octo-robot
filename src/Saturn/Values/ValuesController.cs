@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Polly;
 
 namespace Saturn.Values
 {
@@ -26,7 +27,19 @@ namespace Saturn.Values
         }
 
         [HttpGet("detailed")]
-        public async Task<ActionResult> GetDetailed()
+        public Task<ActionResult> GetDetailed()
+        {
+            var policy = Policy
+                .Handle<Exception>()
+                .CircuitBreakerAsync(
+                    exceptionsAllowedBeforeBreaking: 2,
+                    durationOfBreak: TimeSpan.FromSeconds(15)
+                );
+
+            return policy.ExecuteAsync(() => GetDetailedInner());
+        }
+
+        private async Task<ActionResult> GetDetailedInner()
         {
             var random = new Random(DateTime.Now.Millisecond);
             var seed = random.Next(1, 10);
