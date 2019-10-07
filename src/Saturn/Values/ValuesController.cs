@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Polly;
+using Polly.CircuitBreaker;
 
 namespace Saturn.Values
 {
@@ -11,10 +12,12 @@ namespace Saturn.Values
     public class ValuesController : ControllerBase
     {
         private readonly IHttpClientFactory factory;
+        private readonly CircuitBreakerPolicy policy;
 
-        public ValuesController(IHttpClientFactory factory)
+        public ValuesController(IHttpClientFactory factory, CircuitBreakerPolicy policy)
         {
             this.factory = factory;
+            this.policy = policy;
         }
 
         [HttpGet]
@@ -28,16 +31,7 @@ namespace Saturn.Values
 
         [HttpGet("detailed")]
         public Task<ActionResult> GetDetailed()
-        {
-            var policy = Policy
-                .Handle<Exception>()
-                .CircuitBreakerAsync(
-                    exceptionsAllowedBeforeBreaking: 2,
-                    durationOfBreak: TimeSpan.FromSeconds(15)
-                );
-
-            return policy.ExecuteAsync(() => GetDetailedInner());
-        }
+            => policy.ExecuteAsync(() => GetDetailedInner());
 
         private async Task<ActionResult> GetDetailedInner()
         {

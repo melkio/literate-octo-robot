@@ -6,11 +6,11 @@ services:
       context: "./src/Neptune"
     environment:
       # NORMAL
-      - "NEPTUNE_API_DELAY_THRESHOLD=0"
-      - "NEPTUNE_VALUES_API_SECONDS_DELAY=0"
+      # - "NEPTUNE_API_DELAY_THRESHOLD=0"
+      # - "NEPTUNE_VALUES_API_SECONDS_DELAY=0"
       # DDOS
-      # - "NEPTUNE_API_DELAY_THRESHOLD=1000"
-      # - "NEPTUNE_VALUES_API_SECONDS_DELAY=100"
+      - "NEPTUNE_API_DELAY_THRESHOLD=1000"
+      - "NEPTUNE_VALUES_API_SECONDS_DELAY=100"
 
   saturn:
     build: 
