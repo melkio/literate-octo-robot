@@ -22,5 +22,15 @@ namespace Neptune.Values
 
             return Ok(new { value = value });
         }
+
+        [HttpGet("transient")]
+        public ActionResult GetTransient()
+        {
+            var seconds = DateTime.Now.Second;
+            if (seconds % 5 == 0)
+                throw new InvalidOperationException();
+
+            return Ok(new { value = seconds });
+        }
     }
 }

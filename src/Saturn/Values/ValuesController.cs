@@ -29,6 +29,23 @@ namespace Saturn.Values
             return Ok(new { value = seed });
         }
 
+        [HttpGet("transient")]
+        public async Task<ActionResult> GetTransient()
+        {
+            var random = new Random(DateTime.Now.Millisecond);
+            var seed = random.Next(1, 10);
+
+            var client = factory.CreateClient("Neptune");
+            var response = await client.GetAsync("/api/values/transient");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonConvert.DeserializeAnonymousType(content, new { value = "" });
+
+            var model = new { saturn = seed, neptune = json.value };
+            return Ok(model);
+        }
+
         [HttpGet("detailed")]
         public Task<ActionResult> GetDetailed()
             => policy.ExecuteAsync(() => GetDetailedInner());
