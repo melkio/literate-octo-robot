@@ -1,0 +1,16 @@
+[global]
+  checkNewVersion = false
+  sendAnonymousUsage = false
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+[api]
+  insecure = true
+  dashboard = true
+  debug = true
+
+[providers]
+  [providers.file]
+    filename = "/etc/traefik/traefik-config.toml"

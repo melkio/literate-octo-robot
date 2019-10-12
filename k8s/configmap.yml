@@ -1,0 +1,39 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: traefik
+data:
+  static: | 
+    [global]
+      checkNewVersion = false
+      sendAnonymousUsage = false
+
+    [entryPoints]
+      [entryPoints.web]
+        address = ":80"
+
+    [api]
+      insecure = true
+      dashboard = true
+      debug = true
+    
+    [log]
+      level = "DEBUG"
+
+    [providers]
+      [providers.file]
+        filename = "/etc/traefik/traefik-config.toml"
+
+  dynamic: |
+    [http]
+      [http.routers]
+        [http.routers.router0]
+          entryPoints = ["web"]
+          service = "saturn"
+          rule = "PathPrefix(`/`)"
+
+        [http.services]
+          [http.services.saturn]
+            [http.services.saturn.loadBalancer]
+              [[http.services.saturn.loadBalancer.servers]]
+                url = "http://127.0.0.1:5000/"
