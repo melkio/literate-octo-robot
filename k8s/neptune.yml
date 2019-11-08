@@ -38,9 +38,9 @@ spec:
         - name: ASPNETCORE_URLS
           value: http://+:5000
         - name: NEPTUNE_API_DELAY_THRESHOLD
-          value: "0"
+          value: "1000"
         - name: NEPTUNE_VALUES_API_SECONDS_DELAY
-          value: "0"
+          value: "100"
         ports:
         - containerPort: 5000
       - name: neptune-proxy

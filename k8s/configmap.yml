@@ -31,9 +31,14 @@ data:
           entryPoints = ["web"]
           service = "saturn"
           rule = "PathPrefix(`/`)"
+          middlewares = ["latency-check"]
 
         [http.services]
           [http.services.saturn]
             [http.services.saturn.loadBalancer]
               [[http.services.saturn.loadBalancer.servers]]
                 url = "http://127.0.0.1:5000/"
+
+        [http.middlewares]
+          [http.middlewares.latency-check.circuitBreaker]
+            expression = "LatencyAtQuantileMS(50.0) > 500"
